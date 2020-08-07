@@ -1,12 +1,13 @@
 {
-  "name": "vue-calendar-panel",
+  "name": "vue-calendar-panel-easy",
   "version": "0.1.0",
-  "description": "Calendar component based on Vue cli4.0",
+  "description": "Calendar component based on Vue cli4.0. Please do not download the first edition",
   "main": "lib/vue-calendar-panel.umd.min.js",
-  "keyword": "vue-calendar-panel calendar vue-calendar",
+  "keyword": "vue vue-calendar-panel calendar vue-calendar",
   "license": "MIT",
   "private": false,
-  "author": "parker_banxian",
+  "author": "parker_banxian <jwj1028198397@163.com>",
+  "homepage": "https://github.com/jwjGithub/vue-calendar-panel",
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
@@ -15,6 +16,8 @@
   },
   "dependencies": {
     "core-js": "^3.6.5",
+    "node-sass": "^4.14.1",
+    "sass-loader": "^9.0.3",
     "vue": "^2.6.11"
   },
   "devDependencies": {
