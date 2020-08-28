@@ -1,16 +1,16 @@
-# vue-calendar-panel
+# vue-calendar-panel-easy
 ### 简约的日历插件
 
 ## npm 安装
 ```
-npm i vue-calendar-panel -S
+npm i vue-calendar-panel-easy -S
 ```
 
 ## 全局引入
 ```
 import Vue from 'vue'
 import App from './App.vue'
-import CalendarPanel from 'vue-calendar-panel'
+import CalendarPanel from 'vue-calendar-panel-easy'
 
 Vue.use(CalendarPanel)
 ```
