@@ -11,7 +11,7 @@ npm i vue-calendar-panel-easy -S
 import Vue from 'vue'
 import App from './App.vue'
 import CalendarPanel from 'vue-calendar-panel-easy'
-
+import 'vue-calendar-panel-easy/lib/vue-calendar-panel.css' // 引入样式
 Vue.use(CalendarPanel)
 ```
 
