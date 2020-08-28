@@ -1,18 +1,31 @@
 <template>
   <div id="app">
-    <!-- <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/> -->
-    <calendar-panel></calendar-panel>
+    {{ date }}
+    <calendar-panel v-model="date">
+      <template v-slot:th="th">
+        星期{{ th.week }}
+      </template>
+      <template v-slot:td="dataList">
+        {{ dataList.date }}
+      </template>
+    </calendar-panel>
   </div>
 </template>
 
 <script>
-// import HelloWorld from './components/HelloWorld.vue'
 
 export default {
   name: 'App',
+  data() {
+    return {
+      date: '2020-07-07'
+    }
+  },
   components: {
-    // HelloWorld
+  },
+  created() {
+  },
+  methods: {
   }
 }
 </script>

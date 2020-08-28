@@ -3,15 +3,15 @@
     <div class="calendar_body">
       <table cellspacing="0" cellpadding="0" class="calendar-table">
         <thead>
-          <th v-for="week in weekList" :key="week">
-            {{ week }}
+          <th v-for="(week,index) in weekList" :key="index">
+            <slot name="th" v-bind="{ week,index }">{{ week }}</slot>
           </th>
         </thead>
         <tbody>
           <tr v-for="(row,index) in dataList" :key="index">
             <td v-for="(col,indexCol) in row" :key="indexCol" class="td-row" @click="calendarClick(col)" :class="col.isSameDay == true ? col.type + ' is-same-day' : col.type ">
               <div class="calendar_day">
-                {{ col.day }}
+                <slot name="td" v-bind="col">{{ col.day }}</slot>
               </div>
             </td>
           </tr>
@@ -24,6 +24,10 @@
 export default {
   name: 'CalendarPanel',
   props: {
+    date: {
+      type:null,
+      default: ''
+    },
     // 点击单元格是否切换日历
     clickChangeCalendar: {
       type: Boolean,
@@ -31,31 +35,42 @@ export default {
       default:true
     }
   },
+  model: {
+    prop: 'date',
+    event: 'dateChange'
+  },
+  watch: {
+    date(val){
+      this.getDataList(val)
+    }
+  },
   data() {
     return {
-      date:'',
       dataList: [],
       weekList: ['一', '二', '三', '四', '五', '六', '日'],
     }
   },
   created(){
-    this.getDataList()
+    this.getDataList(this.date)
   },
   methods: {
     // 获取日历数据
-    getDataList() {
-      let date = new Date(this.date || new Date())
+    getDataList(val) {
+      let date = new Date(val || new Date())
       let year = date.getFullYear() // 当年年份
       let month = date.getMonth() // 当前月份
       this.setDateList(year, month + 1)
     },
+    // 时间change事件
+    dateChange(val){
+      // 修改date的值
+      this.$emit('dateChange', val)
+    },
     // 单元格点击事件
     calendarClick(row){
       if(this.clickChangeCalendar === true){
-        this.date = row.date
-        this.getDataList()
+        this.dateChange(row.date)
       }
-      console.log(row,"---")
     },
     // 返回当前日历面板数据
     setDateList(year, month) {
@@ -93,13 +108,6 @@ export default {
         if (sameDay === date) {
           json.isSameDay = true
         }
-        // list.forEach(item => {
-        //   let schedulDate = this.parseTime(item.schedulDate, '{y}-{m}-{d}')
-        //   if (schedulDate === date) {
-        //     json.list = item.groupShifts
-        //     return
-        //   }
-        // })
         dateList.push(json)
       }
       // 下个月补充天数
